@@ -77,7 +77,7 @@ export default function LoveLetter() {
             Mi amor you've been the most colorful addition in my life and bombarded me with all those kisses, you
             introduced me to a new world, held my hand building the bond that we have right now. I have started to
             optimize my actions for "will this make riri smile?", seeing your lips go cheek to cheek makes me feel like
-            I'm in a strawberry fram in spring.
+            I'm in a strawberry farm in spring.
           </p>
           <p>
             And I realise I haven't been my best self and have hurt you at times along the way but I promise you I've
