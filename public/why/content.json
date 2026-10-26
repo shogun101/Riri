@@ -1,0 +1,61 @@
+{
+  "title": "Why I love you Supreme Lord Princess Riri",
+  "herName": "Riri",
+  "myName": "Akshit",
+  "gate": {
+    "enabled": true,
+    "question": "Who's your daddy?",
+    "answer": "Vir",
+    "acceptedVariants": [
+      "vir",
+      "veer"
+    ]
+  },
+  "designer": {
+    "headline": "Local man confirms: his favourite human is also his favourite designer",
+    "body": "In an exclusive statement to this paper, Akshit said he is so, so proud of her work. The way she sees things, the care she puts into every tiny detail, and how everything she touches ends up looking better than it did before. Sources close to him say he shows her work to people whether they ask or not.",
+    "quote": "\"She's not just my favourite human being. She's my favourite designer.\""
+  },
+  "postcard": [
+    "Hey you, take a breath.",
+    "You've said \"I can't\" before, and then you went and did it, beautifully, every single time.",
+    "You don't have to have it all figured out today. Go slow, be gentle with yourself, and remember who you are.",
+    "I'm in your corner, always."
+  ],
+  "closingLead": "Did I tell you?",
+  "closingLine": "I lub juuu",
+  "voiceNote": {
+    "audioUrl": "assets/audio/voice-note.m4a"
+  },
+  "meta": {
+    "letterSource": "iloveriri.com",
+    "devices": [
+      "iPhone",
+      "iPad"
+    ],
+    "hosting": "Vercel"
+  },
+  "letterExcerpts": [
+    {
+      "style": "type",
+      "text": "you've been the most colorful addition in my life"
+    },
+    {
+      "style": "hand",
+      "text": "I have started to optimize my actions for \"will this make riri smile?\""
+    },
+    {
+      "style": "clip",
+      "text": "seeing your lips go cheek to cheek makes me feel like I'm in a strawberry farm in spring"
+    },
+    {
+      "style": "feature",
+      "text": "I love you more than I did yesterday, but less than I will tomorrow."
+    },
+    {
+      "style": "type",
+      "text": "Buckle up babe. next adventure soon."
+    }
+  ],
+  "letterLink": "/"
+}

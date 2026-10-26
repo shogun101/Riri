@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <base href="/why/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4ece0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>For Riri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Archivo+Black&family=Bodoni+Moda:ital,opsz,wght@0,6..96,700;1,6..96,700&family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Courier+Prime:wght@700&family=DM+Serif+Display:ital@0;1&family=Jost:wght@400;500&family=Pinyon+Script&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/deco/paper.webp">
+  <link rel="preload" as="image" href="assets/themes/renaissance.webp">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-locked">
+
+  <!-- ============ home: portrait, title, sealed envelope ============ -->
+  <section class="intro" id="intro" aria-label="A letter for Riri">
+    <div class="intro__stage">
+      <figure class="intro__portrait">
+        <img src="assets/themes/renaissance.webp" alt="Riri painted as a Renaissance princess" width="640" height="800">
+      </figure>
+
+      <h1 class="ransom intro__title" data-ransom data-k="title">Why I love you Supreme Lord Princess Riri</h1>
+
+      <button class="intro__env" id="open-env" aria-label="Open the envelope">
+        <img class="intro__env-img" src="assets/deco/envelope.webp" alt="" width="900" height="672">
+        <span class="hand intro__env-to">for <span data-k="herName">Riri</span></span>
+      </button>
+      <p class="hand intro__hint">tap the seal</p>
+    </div>
+
+    <!-- the letter that slides out of the envelope -->
+    <form class="gate" id="gate" autocomplete="off" novalidate aria-hidden="true">
+      <p class="caps gate__label">one tiny question first</p>
+      <label class="script gate__q" for="gate-input" data-k="gate.question">Who's your daddy?</label>
+      <input class="gate__input" id="gate-input" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="your answer" tabindex="-1">
+      <p class="gate__msg" role="status" aria-live="polite"></p>
+      <button class="pill" type="submit" tabindex="-1">unlock</button>
+      <img class="gate__stamp" src="assets/deco/seal.webp" alt="">
+    </form>
+  </section>
+
+  <!-- ============ scrapbook ============ -->
+  <main class="book" id="book" hidden>
+
+    <!-- hero: heart collage -->
+    <section class="board board--hero" aria-label="Us">
+      <svg class="it it--flat doodle" style="--x:80;--y:30;--w:16;--r:12;--z:2" viewBox="0 0 100 90" aria-hidden="true"><path d="M50 82C22 62 6 46 8 28 10 12 28 6 40 16c5 4 8 9 10 14 2-6 6-11 11-14 13-9 30-2 31 14 1 18-16 34-42 52z"/></svg>
+      <svg class="it it--flat doodle" style="--x:2;--y:30;--w:14;--r:-14;--z:2" viewBox="0 0 100 90" aria-hidden="true"><path d="M50 82C22 62 6 46 8 28 10 12 28 6 40 16c5 4 8 9 10 14 2-6 6-11 11-14 13-9 30-2 31 14 1 18-16 34-42 52z"/></svg>
+
+      <div class="it heart" style="--x:9;--y:7;--w:82;--z:4">
+        <img src="assets/us/photo/1202.webp" alt="Riri and Akshit by candlelight" width="800" height="1000">
+      </div>
+
+      <img class="it cut" data-depth="-.06" src="assets/us/cut/9329.webp" style="--x:-7;--y:-1;--w:34;--r:-10;--z:6" alt="Riri kissing Akshit">
+      <img class="it cut" data-depth=".05" src="assets/us/cut/9959.webp" style="--x:70;--y:0;--w:34;--r:8;--z:6" alt="Riri and Akshit being silly">
+      <img class="it" data-depth="-.1" src="assets/fun/chromeheart.webp" style="--x:42;--y:-3;--w:16;--r:12;--z:9" alt="">
+      <img class="it" src="assets/deco/kiss.webp" style="--x:-2;--y:40;--w:20;--r:-16;--z:8" alt="">
+      <img class="it cut" data-depth=".08" src="assets/us/cut/0043.webp" style="--x:38;--y:60;--w:58;--r:-3;--z:10" alt="Riri kissing Akshit on the cheek">
+      <img class="it cut" data-depth="-.04" src="assets/us/cut/9814.webp" style="--x:-4;--y:52;--w:30;--r:-4;--z:9" alt="Riri in a red top">
+      <img class="it cut" data-depth=".12" src="assets/fun/buffcat.webp" style="--x:80;--y:78;--w:19;--r:6;--z:12" alt="A cat flexing its muscles">
+      <span class="it it--flat hand tag-note" style="--x:58;--y:96;--w:42;--r:-4;--z:12">me, protecting you</span>
+      <img class="it" src="assets/deco/lily.webp" style="--x:-6;--y:84;--w:26;--r:-8;--z:11" alt="">
+      <img class="it drift" src="assets/deco/butterfly.webp" style="--x:86;--y:44;--w:13;--r:16;--z:11" alt="">
+
+      <button class="it egg-voice" style="--x:22;--y:86;--w:15;--r:-12;--z:13" aria-label="Press me">
+        <img src="assets/deco/compact.webp" alt="">
+        <span class="hand egg-voice__hint">press me</span>
+      </button>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="marquee__track"></div></div>
+
+    <!-- excerpts from the letter on iloveriri.com -->
+    <section class="chapter chapter--excerpts" aria-label="From my letter to you">
+      <h2 class="ransom chapter__ransom" data-ransom>from my letter to you</h2>
+      <img class="excerpts__stamp" src="assets/themes/stamp.webp" alt="">
+      <div class="excerpts" data-list="excerpts"></div>
+      <a class="hand excerpts__link" data-k-href="letterLink" href="/">read the whole letter</a>
+      <img class="excerpts__pin" src="assets/fun/kitten.webp" alt="A kitten in a party hat">
+    </section>
+
+    <!-- newspaper clipping: favourite designer -->
+    <section class="chapter chapter--news" aria-label="Favourite designer">
+      <article class="news">
+        <header class="news__mast">
+          <span class="caps">vol. 1</span>
+          <span class="news__name">The Daily Riri</span>
+          <span class="caps">extra! extra!</span>
+        </header>
+        <h2 class="ransom news__ransom" data-ransom>my fav designer</h2>
+        <h3 class="news__head" data-k="designer.headline"></h3>
+        <div class="news__cols">
+          <figure class="news__photo">
+            <img src="assets/us/photo/0953.webp" alt="Riri at a cafe" loading="lazy">
+            <figcaption>The designer, pictured.</figcaption>
+          </figure>
+          <p class="news__body" data-k="designer.body"></p>
+        </div>
+        <p class="news__quote" data-k="designer.quote"></p>
+      </article>
+    </section>
+
+    <!-- flashy: us in other universes -->
+    <section class="universe" aria-label="Us in other universes">
+      <div class="universe__sparkle" aria-hidden="true"></div>
+      <div class="universe__disco" aria-hidden="true"><i></i><img src="assets/fun/disco.webp" alt=""></div>
+      <h2 class="ransom universe__title" data-ransom>us, in other universes</h2>
+      <div class="board board--uni">
+        <figure class="it uni" data-depth="-.05" style="--x:0;--y:0;--w:54;--r:-5;--z:3"><img src="assets/themes/gta.webp" alt="Riri and Akshit as GTA style art"><figcaption class="caps">los santos</figcaption></figure>
+        <figure class="it uni" data-depth=".05" style="--x:48;--y:6;--w:52;--r:5;--z:4"><img src="assets/themes/pixar.webp" alt="Riri and Akshit as animated movie characters"><figcaption class="caps">the movie</figcaption></figure>
+        <figure class="it uni" data-depth=".08" style="--x:2;--y:38;--w:48;--r:4;--z:5"><img src="assets/themes/chibi.webp" alt="Riri and Akshit as chibi anime characters"><figcaption class="caps">the anime</figcaption></figure>
+        <figure class="it uni" data-depth="-.06" style="--x:50;--y:42;--w:46;--r:-6;--z:5"><img src="assets/themes/bricks.webp" alt="Riri and Akshit as toy minifigures"><figcaption class="caps">some assembly required</figcaption></figure>
+        <figure class="it uni" data-depth=".04" style="--x:22;--y:70;--w:52;--r:-2;--z:6"><img src="assets/themes/clay.webp" alt="Riri and Akshit as clay figures"><figcaption class="caps">handmade</figcaption></figure>
+        <img class="it twinkle" src="assets/fun/chromestar.webp" style="--x:78;--y:76;--w:18;--r:-10;--z:7" alt="">
+        <img class="it twinkle" src="assets/fun/chromeheart.webp" style="--x:0;--y:84;--w:16;--r:10;--z:7" alt="">
+      </div>
+    </section>
+
+    <!-- clothesline timeline -->
+    <section class="chapter" aria-label="Us, so far">
+      <h2 class="ransom chapter__ransom" data-ransom>us, so far</h2>
+      <div class="line" tabindex="0" aria-label="Photos in date order, swipe sideways">
+        <div class="line__track"></div>
+      </div>
+      <p class="caps line__hint">swipe sideways</p>
+    </section>
+
+    <!-- couple wall -->
+    <section class="board board--wall" aria-label="You and me">
+      <h2 class="it it--flat script wall__title" style="--x:0;--y:0;--w:100;--z:20">you &amp; me</h2>
+      <img class="it cut" data-depth="-.04" src="assets/us/cut/9518.webp" style="--x:-2;--y:9;--w:56;--r:-5;--z:3" alt="Riri and Akshit on a bus">
+      <img class="it cut" data-depth=".05" src="assets/us/cut/0366.webp" style="--x:46;--y:10;--w:56;--r:6;--z:4" alt="Riri and Akshit in jackets">
+      <img class="it" src="assets/deco/gbow.webp" style="--x:40;--y:30;--w:20;--r:-10;--z:9" alt="">
+      <img class="it cut" data-depth=".07" src="assets/us/cut/9728.webp" style="--x:6;--y:36;--w:62;--r:2;--z:6" alt="Riri kissing Akshit in a field">
+      <img class="it cut" data-depth="-.06" src="assets/fun/penguins.webp" style="--x:66;--y:42;--w:32;--r:8;--z:7" alt="Two plush penguins hugging">
+      <img class="it cut" src="assets/us/cut/0508.webp" style="--x:-4;--y:66;--w:28;--r:-4;--z:8" alt="Riri with arms open">
+      <img class="it cut" data-depth=".05" src="assets/us/cut/v0237_05.webp" style="--x:26;--y:66;--w:46;--r:-3;--z:8" alt="Riri and Akshit by a lake">
+      <img class="it cut" src="assets/fun/kitten.webp" style="--x:76;--y:70;--w:18;--r:6;--z:9" alt="">
+      <img class="it" src="assets/deco/hibiscus.webp" style="--x:78;--y:86;--w:22;--r:-8;--z:9" alt="">
+    </section>
+
+    <!-- postcard: open when you feel you can't -->
+    <section class="chapter chapter--postcard" aria-label="For when you feel you can't">
+      <button class="pc" aria-label="Flip the postcard">
+        <span class="pc__inner">
+          <span class="pc__face pc__front">
+            <img src="assets/us/photo/0508.webp" alt="" loading="lazy">
+            <span class="ransom pc__ransom" data-ransom>open when you feel you can't</span>
+          </span>
+          <span class="pc__face pc__back">
+            <span class="pc__msg hand" data-list="postcard"></span>
+            <span class="pc__side">
+              <img class="pc__stamp" src="assets/themes/stamp.webp" alt="">
+              <span class="pc__addr hand">to: <span data-k="herName">Riri</span></span>
+            </span>
+          </span>
+        </span>
+      </button>
+      <p class="hand postcard-hint">tap to turn it over</p>
+    </section>
+
+    <!-- p.s. voice note -->
+    <section class="chapter chapter--ps" aria-label="P.S.">
+      <div class="ps torn-edges">
+        <p class="caps">p.s.</p>
+        <button class="egg-voice ps__btn" aria-label="Play a voice note"><img src="assets/deco/compact.webp" alt=""></button>
+        <p class="hand ps__hint">press it. as many times as you want.</p>
+      </div>
+    </section>
+
+    <!-- finale -->
+    <section class="finale" aria-label="The end">
+      <p class="hand finale__lead" data-k="closingLead">Did I tell you?</p>
+      <h2 class="ransom finale__line" data-ransom data-k="closingLine">I lub juuu</h2>
+      <p class="hand finale__from">from <span data-k="myName">Akshit</span>, for <span data-k="herName">Riri</span></p>
+      <button class="pill" data-top>read it again</button>
+      <div class="hearts" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <audio id="voice" preload="none" playsinline></audio>
+  <div class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
