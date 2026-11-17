@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f4ece0">
+<meta name="robots" content="noindex, nofollow">
+<title>Riri's Gem Tray</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Abril+Fatface&family=Bodoni+Moda:ital,opsz,wght@1,6..96,700&family=Archivo+Black&family=Patrick+Hand&family=Caveat:wght@600;700&display=swap">
+<style>
+/* Layout: a scrapbook comic. One page on screen at a time (cover, plan, six jobs, extras), each job told
+   as a three-panel strip: the job, who to DM, what to say. Handmade paper, cut-out letters, one wax-red accent.
+   Single committed look, matching the paper scrapbook it sits beside. */
+:root{
+  color-scheme:light;
+  --paper:#F4ECE0; --card:#FFFDF8; --ink:#2F1419; --soft:#7A5A5E; --news:#E9DFCB;
+  --wine:#6B1628; --rasp:#D2304F; --pink:#F3C7D2; --gold:#D9A441; --mint:#CFE8D6; --mint-ink:#1E5A3A;
+  --hand:"Caveat","Bradley Hand",cursive; --comic:"Patrick Hand","Comic Sans MS","Trebuchet MS",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:auto}
+body{background:var(--paper);color:var(--ink);font-family:var(--comic);font-size:18px;line-height:1.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .15 0 0 0 0 .1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 56px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:980px;margin:0 auto}
+p,h1,h2,h3{margin:0}
+a{color:var(--wine)}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--rasp);outline-offset:3px;border-radius:6px}
+
+/* chapter bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);padding-block:10px;border-bottom:2px dashed var(--ink)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:2px solid var(--ink);background:var(--card);border-radius:99px;padding:4px 12px;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.chip svg{width:18px;height:18px}
+.chip .gem{fill:none;stroke:var(--ink);stroke-width:3}
+.chip.sent .gem{fill:var(--rasp);stroke:var(--rasp)}
+.chip[aria-current="true"]{background:var(--ink);color:var(--card)}
+.chip[aria-current="true"] .gem{stroke:var(--card)}
+.chip[aria-current="true"].sent .gem{stroke:var(--rasp)}
+
+/* cut-out letters */
+.cut{display:flex;flex-wrap:wrap;justify-content:center;gap:5px 3px;line-height:1}
+.cut span{display:inline-block;padding:.08em .16em .1em;font-size:clamp(2rem,9vw,4.2rem);box-shadow:1px 2px 3px rgba(47,20,25,.25)}
+.cut span.sp{box-shadow:none;padding:0;width:.35em}
+.cut.small span{font-size:clamp(1.4rem,5.5vw,2.3rem)}
+.cut .t0{background:var(--ink);color:#fff;font-family:"Anton",Impact,sans-serif;transform:rotate(-3deg)}
+.cut .t1{background:var(--wine);color:var(--pink);font-family:"Bodoni Moda","Didot",serif;font-style:italic;transform:rotate(2deg)}
+.cut .t2{background:var(--card);color:var(--rasp);font-family:"Archivo Black","Arial Black",sans-serif;transform:rotate(-1deg)}
+.cut .t3{background:var(--pink);color:var(--wine);font-family:"Abril Fatface",Georgia,serif;transform:rotate(3deg)}
+.cut .t4{background:var(--news);color:var(--ink);font-family:"Abril Fatface",Georgia,serif;transform:rotate(-2deg)}
+.cut .t5{background:var(--rasp);color:#fff;font-family:"Bodoni Moda","Didot",serif;font-style:italic;transform:rotate(1deg)}
+
+/* pages */
+.page{padding-top:26px;display:flex;flex-direction:column;gap:22px}
+.hand{font-family:var(--hand);font-size:1.6rem;line-height:1.1;color:var(--wine);text-align:center}
+.cover{align-items:center;text-align:center;gap:18px;padding-top:36px}
+.cover .star{width:150px;height:auto}
+.seal{width:92px;height:92px;border-radius:50%;border:0;background:radial-gradient(circle at 35% 30%,#9A2A40,var(--wine) 60%,#4A0E1B);color:#F6DDE2;font-family:var(--hand);font-size:1.7rem;font-weight:700;box-shadow:0 4px 0 #3D0B17,0 8px 14px rgba(47,20,25,.3)}
+.seal:active{transform:translateY(3px);box-shadow:0 1px 0 #3D0B17}
+
+/* comic strip */
+.strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.strip.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.panel{background:var(--card);border:3px solid var(--ink);border-radius:4px;box-shadow:5px 5px 0 var(--ink);padding:38px 14px 14px;position:relative;display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;min-width:0}
+.panel:nth-child(odd){transform:rotate(-.6deg)} .panel:nth-child(even){transform:rotate(.5deg)}
+.cap{position:absolute;top:-3px;left:-3px;background:var(--pink);border:3px solid var(--ink);padding:1px 10px;font-family:"Anton",Impact,sans-serif;letter-spacing:.06em;font-size:.95rem;text-transform:uppercase}
+.big{font-family:"Abril Fatface",Georgia,serif;font-size:1.55rem;line-height:1.05;text-wrap:balance}
+.sub{color:var(--soft);font-size:1rem;line-height:1.2}
+.fig{width:96px;height:auto;flex:none}
+.bubble{background:#fff;border:3px solid var(--ink);border-radius:20px;padding:10px 14px;position:relative;font-size:1.05rem;line-height:1.3;text-align:left;width:100%;overflow-wrap:anywhere;white-space:pre-wrap}
+.bubble::after{content:"";position:absolute;left:28px;bottom:-14px;border:7px solid transparent;border-top-color:var(--ink);border-left-color:var(--ink)}
+.bubble.up::after{bottom:auto;top:-14px;border-color:transparent;border-bottom-color:var(--ink);border-left-color:var(--ink)}
+.bubble.c{text-align:center}
+.ct{background:var(--gold);border:3px solid var(--ink);border-radius:50%;width:74px;height:74px;display:grid;place-content:center;font-family:"Anton",Impact,sans-serif;font-size:1.25rem;line-height:1;transform:rotate(8deg);position:absolute;top:-16px;right:-10px}
+.ct small{font-family:var(--comic);font-size:.72rem;display:block}
+.who a{font-family:"Abril Fatface",Georgia,serif;font-size:1.4rem;line-height:1.1}
+.also{font-size:.95rem;color:var(--soft);line-height:1.5}
+.btn{border:3px solid var(--ink);background:var(--rasp);color:#fff;border-radius:99px;padding:4px 18px;box-shadow:3px 3px 0 var(--ink);font-family:"Anton",Impact,sans-serif;letter-spacing:.05em;text-transform:uppercase;font-size:.95rem;text-decoration:none;display:inline-block}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.alt{background:var(--card);color:var(--ink)}
+.btn.ok{background:var(--mint);color:var(--mint-ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center}
+.heads{background:#FFE9A6;border:2px dashed var(--ink);padding:6px 12px;transform:rotate(-1deg);align-self:center;max-width:100%;text-align:center}
+details.long{width:100%}
+details.long summary{cursor:pointer;color:var(--wine);text-decoration:underline;list-style:none;text-align:center}
+details.long summary::-webkit-details-marker{display:none}
+details.long .bubble{margin-top:10px;font-size:.98rem}
+details.long .bubble::after{display:none}
+.sentbox{display:inline-flex;gap:8px;align-items:center;font-family:"Anton",Impact,sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.sentbox input{width:24px;height:24px;accent-color:var(--rasp)}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:6px}
+.more{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.more li{background:var(--card);border:2px solid var(--ink);padding:8px 12px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.more b{font-family:"Anton",Impact,sans-serif;font-weight:400}
+.fine{color:var(--soft);font-size:.95rem;text-align:center}
+@media (max-width:760px){ .strip,.strip.four{grid-template-columns:minmax(0,1fr);gap:22px} .panel{transform:none!important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="bar" aria-label="Pages"><div class="chips" id="chips"></div></nav>
+  <main id="main"></main>
+</div>
+
+<script>
+const CUTS = {
+  round:'<polygon class="gem" points="24,4 38,10 44,24 38,38 24,44 10,38 4,24 10,10"/>',
+  emerald:'<polygon class="gem" points="13,5 35,5 43,13 43,35 35,43 13,43 5,35 5,13"/>',
+  pear:'<path class="gem" d="M24 3 C34 16 41 23 41 31 A17 14 0 0 1 7 31 C7 23 14 16 24 3Z"/>',
+  marquise:'<path class="gem" d="M24 3 C38 14 38 34 24 45 C10 34 10 14 24 3Z"/>',
+  princess:'<rect class="gem" x="6" y="6" width="36" height="36" rx="2"/>',
+  oval:'<ellipse class="gem" cx="24" cy="24" rx="15" ry="20"/>'
+};
+const gem = c => '<svg viewBox="0 0 48 48" aria-hidden="true">' + CUTS[c] + '</svg>';
+
+/* Riri: tiara, big hair, pink dress. mood: 'smile' | 'wow' | 'wink' */
+function riri(mood){
+  const mouth = mood === 'wow' ? '<ellipse cx="50" cy="63" rx="4" ry="5" fill="#2F1419"/>' : '<path d="M42 61q8 8 16 0" fill="none" stroke="#2F1419" stroke-width="2.5" stroke-linecap="round"/>';
+  const eyeR = mood === 'wink' ? '<path d="M55 51q4-3 8 0" fill="none" stroke="#2F1419" stroke-width="2.5" stroke-linecap="round"/>' : '<circle cx="59" cy="51" r="2.6" fill="#2F1419"/>';
+  return '<svg class="fig" viewBox="0 0 100 120" role="img" aria-label="Riri"><path d="M20 54C15 26 33 10 50 10s35 16 30 44c5 16 3 34-4 46H24c-7-12-9-30-4-46z" fill="#2B1418"/><path d="M26 120c0-22 10-32 24-32s24 10 24 32z" fill="#E58FA6" stroke="#2F1419" stroke-width="2.5"/><circle cx="50" cy="52" r="21" fill="#C98A62" stroke="#2F1419" stroke-width="2.5"/><path d="M29 50c1-17 12-24 22-24 11 0 20 8 20 24-9-2-15-8-19-15-4 9-12 13-23 15z" fill="#2B1418"/><circle cx="41" cy="51" r="2.6" fill="#2F1419"/>' + eyeR + '<circle cx="36" cy="59" r="4" fill="#E58FA6" opacity=".7"/><circle cx="64" cy="59" r="4" fill="#E58FA6" opacity=".7"/>' + mouth + '<polygon points="35,22 40,10 45,19 50,6 55,19 60,10 65,22" fill="#D9A441" stroke="#2F1419" stroke-width="2" stroke-linejoin="round"/></svg>';
+}
+/* The person to DM: a plain silhouette with a name badge, deliberately not a likeness of anyone. */
+const boss = '<svg class="fig" viewBox="0 0 100 120" role="img" aria-label="The person to message"><circle cx="50" cy="40" r="22" fill="#6B1628" stroke="#2F1419" stroke-width="2.5"/><path d="M14 120c0-28 14-42 36-42s36 14 36 42z" fill="#6B1628" stroke="#2F1419" stroke-width="2.5"/><rect x="54" y="92" width="22" height="14" rx="2" fill="#FFFDF8" stroke="#2F1419" stroke-width="2"/><path d="M58 97h14M58 101h9" stroke="#2F1419" stroke-width="1.6"/></svg>';
+
+const ROLES = [
+ { id:'derewala', cut:'emerald', fit:'0.74', short:'Derewala', company:'Derewala Industries', role:'Jewellery Designer, International', where:'Jaipur', mood:'wow',
+   think:"They design for many markets. I've done regional styles.", heads:"They list CorelDRAW. Say you use Rhino + Illustrator.",
+   apply:'https://www.linkedin.com/jobs/view/4447139194',
+   people:[['Sneha Kumari','Design Manager','https://www.linkedin.com/in/sneha-kumari-0347511a'],['Sonil Agarwal','Design Manager','https://www.linkedin.com/in/sonil-agarwal-b0763794'],['Harshit Garg','Director','https://www.linkedin.com/in/harshit-garg-75472a86']],
+   note:"Hi Sneha, I saw the International Jewellery Designer opening at Derewala. I'm a NIFT-trained jewellery designer and worked in Jaipur at Zoharet. Would love to connect and share my portfolio. Riya",
+   dm:"Hi Sneha, I saw the Jewellery Designer opening on Derewala's international team.\n\nI'm a NIFT-trained jewellery designer and worked in Jaipur at Zoharet, on design and the handover to CAD and production. As a freelancer I've since designed six collections, each in a different regional aesthetic, which seems close to what designing for international buyers needs.\n\nCould I send you a few pages from those? Portfolio: riyavarshney.com\n\nRiya" },
+ { id:'qeelin', cut:'round', fit:'0.73', short:'Qeelin', company:'Qeelin', role:'Jewelry Designer', where:'Hong Kong', mood:'smile',
+   think:"Sketch, Rhino, real jewel. I did that 250 times.", heads:"Hong Kong means moving. Say you're ready.",
+   apply:'https://www.linkedin.com/jobs/view/4487688147',
+   people:[['Kitty Tsang','Head of Product Development','https://www.linkedin.com/in/kitty-tsang-26582793'],['Avis Wong','Senior Jewellery Designer','https://www.linkedin.com/in/avis-wong-35b5641a'],['Lydia Lim','HR Executive','https://www.linkedin.com/in/lydia-lim-3a64911ab']],
+   note:"Hi Kitty, I saw Qeelin's Jewelry Designer opening. I was head designer at a luxury bridal house in Delhi and model in Rhino. Would love to connect and share my portfolio. Riya",
+   dm:"Hi Kitty, I saw Qeelin is hiring a Jewelry Designer to turn the Creative Director's concepts into technical drawings and 3D.\n\nThat's the part of the work I'm strongest at. As head designer at Purab Paschim, a luxury bridal house in Delhi, I took 250+ pieces from hand sketch to finished piece, and I model in Rhino.\n\nCould I send you two sketch-to-CAD examples? I'm based in India and open to relocating. Portfolio: riyavarshney.com\n\nRiya" },
+ { id:'atelier', cut:'pear', fit:'0.60', short:'Diamond Atelier', company:'Diamond Atelier', role:'Jewelry Designer', where:'Delhi', mood:'wink',
+   think:"They want hand sketching first. Hi, it's me.", heads:"Have 2 or 3 nature sketches ready before you send.",
+   apply:'https://www.linkedin.com/jobs/view/4491127555',
+   people:[['Kushagra Gupta','Art Director','https://www.linkedin.com/in/kshagrgpta'],['Tapasya Ingale','Jewelry Designer','https://www.linkedin.com/in/tapasya-ingale-65a700263'],['Vidhi Kotecha','HR Manager','https://www.linkedin.com/in/vidhi-kotecha-8a4a54295']],
+   note:"Hi Kushagra, I saw the Jewelry Designer opening at Diamond Atelier. Hand sketching is where all my work starts. Would love to connect and share a few pieces. Riya",
+   dm:"Hi Kushagra, I saw the Jewelry Designer opening at Diamond Atelier, and that hand sketching comes first for you.\n\nIt does for me too. I'm a NIFT-trained designer and was head designer at Purab Paschim in Delhi, where every piece began on paper. One collection was shown at Bridal Asia and featured in Vogue.\n\nCould I send you a few hand sketches, including some nature-led ones? Portfolio: riyavarshney.com\n\nRiya" },
+ { id:'pandora', cut:'oval', fit:'0.58', short:'Pandora', company:'Pandora', role:'Senior Jewelry Designer, 12 months', where:'Copenhagen', mood:'wow',
+   think:"Lab-grown diamonds? I lead design for those.", heads:"Big stretch, and it's in Denmark. One bold shot.",
+   apply:'https://www.linkedin.com/jobs/view/4463578814',
+   people:[['Damiano Meacci','Design Director, Lab-Grown Diamond','https://www.linkedin.com/in/damianomeacci'],['Jannike Møller','Senior Director, Design Development','https://www.linkedin.com/in/jannike-møller-g-jensen-67b54172'],['Karina Alaide Morote','Design Development Director','https://www.linkedin.com/in/karinaalaidemorote']],
+   note:"Hi Damiano, I lead design for a lab-grown jewellery brand in India and saw the interim Senior Designer role on your team. Would love to connect and share my portfolio. Riya",
+   dm:"Hi Damiano, I saw the interim Senior Designer opening in Modern Classics & Diamonds.\n\nI currently lead design for a lab-grown jewellery brand in India, 250+ pieces in gold from concept through CAD. Before that I was head designer at a luxury bridal house in Delhi.\n\nI'm earlier in my career than the title suggests, so I'd value your honest read. Could I send a short portfolio? riyavarshney.com\n\nRiya" },
+ { id:'palmonas', cut:'marquise', fit:'0.55', short:'Palmonas', company:'Palmonas', role:'Jewelry Designer', where:'Pune', mood:'smile',
+   think:"Original and sellable. Zarqa was both.", heads:"Pick your 3 most wearable pieces. They also list CorelDRAW.",
+   apply:'https://www.linkedin.com/jobs/view/4487457710',
+   people:[['Pallavi Mohadikar','Founder & CEO','https://www.linkedin.com/in/pallavi-mohadikar-880b5521'],['Rohan Doiphode','Team Lead, CAD Design','https://www.linkedin.com/in/rohan-doiphode-01921a1ab'],['Soniya Goswami','Talent Acquisition','https://www.linkedin.com/in/soniyapuri']],
+   note:"Hi Pallavi, I saw Palmonas is hiring jewellery designers. I'm a NIFT graduate and was head designer at a bridal house in Delhi. Would love to connect and share my portfolio. Riya",
+   dm:"Hi Pallavi, I saw Palmonas is hiring jewellery designers. The line about thinking beyond references and trends is what made me write.\n\nI'm a NIFT-trained jewellery designer, previously head designer at Purab Paschim, a bridal house in Delhi. A fusion collection I designed there was shown at Bridal Asia and became one of their long-term bestsellers.\n\nCould I send you 3 pieces I think fit Palmonas? Portfolio: riyavarshney.com\n\nRiya" },
+ { id:'emori', cut:'princess', fit:'0.39', short:'Emori', company:'Emori', role:'CAD Jewellery Designer', where:'Gurugram', mood:'wink',
+   think:"A Rhino seat. Good foot in the door.", heads:"CAD-only job. Ask if the design team is growing.",
+   apply:'https://www.linkedin.com/jobs/view/4489211285',
+   people:[['Avani Jamwal','Head Designer & Merchandiser','https://www.linkedin.com/in/avani-jamwal-5904a11b0'],['Arushi Jain','Founder & CEO','https://www.linkedin.com/in/arushijain2014'],['Sakshi Jain','HR','https://www.linkedin.com/in/sakshi-jain478']],
+   note:"Hi Avani, I saw the CAD Jewellery Designer opening at Emori. I'm a jewellery designer who models in Rhino. Would love to connect and share my work. Riya",
+   dm:"Hi Avani, I saw the CAD Jewellery Designer opening at Emori.\n\nI'm a jewellery designer who models in Rhino. I lead design for a lab-grown brand working in gold, and at Zoharet I set up the handover from design to CAD to production, so I know where sketches get misread.\n\nMy background is design first, CAD second. If that's useful to your team, could I send a couple of Rhino models? riyavarshney.com\n\nRiya" }
+];
+const EXTRAS = [
+ ['Day 6, one nudge', "Hi [name], following up on my note about the [role] opening. Happy to send 3 pieces instead of the full portfolio if that's easier. Riya"],
+ ['To a designer on the team', "Hi [name], I'm a jewellery designer applying for the open role on your team. One question, if you have a minute: what does a new designer's first month at [brand] look like? Riya"]
+];
+const MORE = [
+ ['58%','Jewellery Designer, Mumbai','recruiter Weekday · ₹7–12 lakh','https://jobs.workable.com/view/wzUPDt2mETgrz5subJoGZo/jewellery-designer-in-mumbai-at-weekday-ai'],
+ ['53%','Jewellery Designer, Procreate','recruiter Neuraleap · Mumbai','https://www.linkedin.com/jobs/view/4486579869'],
+ ['47%','CAD & Jewellery Designer','Katie Loxton · UK','https://careers.katieloxton.com/jobs/8734716-midweight-cad-jewellery-designer'],
+ ['43%','Jewelry Design Technologist','Blue Monkeys in Space · Malta · €32–50k','https://blue.monkeysin.space/jobs/8496562-jewelry-design-technologist']
+];
+
+const KEY = 'riri-sent';
+let sent = {};
+try { sent = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { sent = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(sent)); } catch (e) {} };
+
+function el(tag, cls, text){ const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+function html(tag, cls, markup){ const n = el(tag, cls); n.innerHTML = markup; return n; }
+function cut(text, small){ const d = el('div', 'cut' + (small ? ' small' : '')); d.setAttribute('aria-label', text); d.setAttribute('role', 'heading'); d.setAttribute('aria-level', small ? '2' : '1');
+  let i = 0; for (const ch of text){ const s = el('span', ch === ' ' ? 'sp' : 't' + ((i * 5 + 2) % 6), ch === ' ' ? '' : ch); s.setAttribute('aria-hidden', 'true'); d.append(s); if (ch !== ' ') i++; } return d; }
+function link(text, href, cls){ const a = el('a', cls, text); a.href = href; a.target = '_blank'; a.rel = 'noopener'; return a; }
+function copyBtn(text, src){ const b = el('button', 'btn', 'Copy'); b.type = 'button';
+  b.addEventListener('click', () => {
+    const ok = () => { b.textContent = 'Copied!'; b.classList.add('ok'); setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('ok'); }, 1500); };
+    const fb = () => { const r = document.createRange(); r.selectNodeContents(src); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected'; };
+    try { navigator.clipboard.writeText(text).then(ok, fb); } catch (e) { fb(); }
+  }); return b; }
+function panel(cap){ const p = el('div', 'panel'); p.append(el('span', 'cap', cap)); return p; }
+
+const PAGES = [{ id:'cover', label:'Start' }, { id:'plan', label:'The plan' }].concat(ROLES.map(r => ({ id:r.id, label:r.short, role:r }))).concat([{ id:'extras', label:'Extras' }]);
+let current = 0;
+const main = document.getElementById('main'), chips = document.getElementById('chips');
+
+function navRow(){ const n = el('div', 'nav');
+  const prev = el('button', 'btn alt', '← Back'); prev.type = 'button'; prev.addEventListener('click', () => go(current - 1)); if (current === 0) prev.style.visibility = 'hidden';
+  const next = el('button', 'btn', current === PAGES.length - 2 ? 'Extras →' : 'Next →'); next.type = 'button'; next.addEventListener('click', () => go(current + 1)); if (current === PAGES.length - 1) next.style.visibility = 'hidden';
+  n.append(prev, next); return n; }
+
+function pageCover(){ const p = el('section', 'page cover');
+  const star = html('div', null, riri('smile')); star.firstChild.classList.add('star');
+  const n = Object.values(sent).filter(Boolean).length;
+  const seal = el('button', 'seal', 'open'); seal.type = 'button'; seal.addEventListener('click', () => go(1));
+  p.append(star.firstChild, cut('RIRI GETS HIRED'), el('p', 'hand', '6 jobs · who to DM · what to say'), seal,
+    el('p', 'hand', n ? n + ' of 6 sent. keep going!' : 'picked these out for you. — A'));
+  return p; }
+
+function pagePlan(){ const p = el('section', 'page'); p.append(cut('THE PLAN', true));
+  const s = el('div', 'strip four');
+  [['1', 'smile', 'Skip the portal.\nDM the hiring manager.'], ['2', 'wow', 'Not a cover letter.\nWho you are. One proof.'], ['3', 'wink', 'Make yes easy.\n"Could I send you 3 pieces?"'], ['4', 'smile', 'One nudge after 5 to 7 days.\nThen move on.']]
+    .forEach(x => { const pn = panel('Step ' + x[0]); pn.append(el('div', 'bubble c', x[2]), html('div', null, riri(x[1])).firstChild); s.append(pn); });
+  p.append(s, el('p', 'hand', "one job at a time. we copy his DMs, not his calendar."), navRow()); return p; }
+
+function pageRole(r){ const p = el('section', 'page'); p.append(cut(r.short.toUpperCase(), true));
+  const s = el('div', 'strip');
+  const a = panel('The job'); const ct = el('div', 'ct', Math.round(r.fit * 100) + '%'); ct.append(el('small', null, 'match'));
+  a.append(ct, el('div', 'bubble c', r.think), html('div', null, riri(r.mood)).firstChild, el('p', 'big', r.company), el('p', 'sub', r.role + ' · ' + r.where), link('See listing ↗', r.apply, 'btn alt'));
+  const b = panel('Who to DM'); const who = el('p', 'who'); who.append(link(r.people[0][0], r.people[0][2]));
+  const also = el('p', 'also'); also.append('or: ', link(r.people[1][0], r.people[1][2]), ' (' + r.people[1][1] + '), ', link(r.people[2][0], r.people[2][2]), ' (' + r.people[2][1] + ')');
+  b.append(html('div', null, boss).firstChild, who, el('p', 'sub', r.people[0][1]), link('Open LinkedIn ↗', r.people[0][2], 'btn alt'), also);
+  const c = panel('Say this'); const bub = el('div', 'bubble', r.note);
+  const det = el('details', 'long'); det.append(el('summary', null, 'once connected: full DM'));
+  const longB = el('div', 'bubble', r.dm); const lr = el('div', 'row'); lr.style.marginTop = '10px'; lr.append(copyBtn(r.dm, longB)); det.append(longB, lr);
+  const lab = el('label', 'sentbox'); const cb = el('input'); cb.type = 'checkbox'; cb.id = 'sent-' + r.id; cb.checked = !!sent[r.id];
+  cb.addEventListener('change', () => { sent[r.id] = cb.checked; save(); renderChips(); }); lab.append(cb, 'Sent');
+  const row = el('div', 'row'); row.append(copyBtn(r.note, bub), lab);
+  c.append(bub, row, det);
+  s.append(a, b, c);
+  p.append(s, el('p', 'heads', 'Heads up: ' + r.heads), navRow()); return p; }
+
+function pageExtras(){ const p = el('section', 'page'); p.append(cut('EXTRAS', true), el('p', 'hand', 'no reply? one nudge, then move on.'));
+  const s = el('div', 'strip');
+  EXTRAS.forEach(x => { const pn = panel(x[0]); const b = el('div', 'bubble', x[1]); pn.append(b, copyBtn(x[1], b)); s.append(pn); });
+  const ul = el('ul', 'more'); MORE.forEach(m => { const li = el('li'); li.append(el('b', null, m[0]), link(m[1], m[3]), el('span', 'sub', m[2])); ul.append(li); });
+  p.append(s, el('p', 'hand', 'four more worth a look'), ul,
+    el('p', 'fine', '% match = how likely an AI judge thinks they shortlist your resume. Check each person still works there before you send. Every number comes from your resume. Ticks are saved on this device only.'), navRow()); return p; }
+
+function renderChips(){ chips.textContent = '';
+  PAGES.forEach((pg, i) => { const b = el('button', 'chip' + (pg.role && sent[pg.id] ? ' sent' : '')); b.type = 'button';
+    if (pg.role) b.innerHTML = gem(pg.role.cut); b.append(pg.label); if (i === current) b.setAttribute('aria-current', 'true');
+    b.addEventListener('click', () => go(i)); chips.append(b); });
+  const cur = chips.children[current]; if (cur && cur.scrollIntoView) { try { cur.scrollIntoView({ block:'nearest', inline:'center' }); } catch (e) {} } }
+
+function go(i){ current = Math.max(0, Math.min(PAGES.length - 1, i)); const pg = PAGES[current];
+  main.textContent = '';
+  main.append(pg.id === 'cover' ? pageCover() : pg.id === 'plan' ? pagePlan() : pg.id === 'extras' ? pageExtras() : pageRole(pg.role));
+  renderChips(); try { window.scrollTo(0, 0); } catch (e) {} }
+go(0);
+</script>
+</body>
+</html>
